@@ -11,7 +11,10 @@ export const loadNotesFail = createAction(
   props<{ err: any }>()
 );
 
-export const createNote = createAction('[Notes] Create note');
+export const createNote = createAction(
+  '[Notes] Create note',
+  props<{ note: Note }>()
+);
 export const createNoteSuccess = createAction(
   '[Notes] Create Success',
   props<{ note: Note }>()
@@ -21,7 +24,10 @@ export const createNoteFail = createAction(
   props<{ err: any }>()
 );
 
-export const updateNote = createAction('[Notes] Update note');
+export const updateNote = createAction(
+  '[Notes] Update note',
+  props<{ note: Note }>()
+);
 export const updateNoteSuccess = createAction(
   '[Notes] Update note Success',
   props<{ note: Note }>()
@@ -31,7 +37,10 @@ export const updateNoteFail = createAction(
   props<{ err: any }>()
 );
 
-export const removeNote = createAction('[Notes] Remove note');
+export const removeNote = createAction(
+  '[Notes] Remove note',
+  props<{ note: Note }>()
+);
 export const removeNoteSuccess = createAction(
   '[Notes] Remove note Success',
   props<{ note: Note }>()

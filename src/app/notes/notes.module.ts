@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { NotesRoutingModule } from './notes-routing.module';
 import { NoteListComponent } from './containers/note-list/note-list.component';
+import { NotesService } from './notes.service';
 import { NoteEffects } from './store/effects';
 import { noteReducer } from './store/reducer';
 
@@ -15,6 +16,7 @@ import { noteReducer } from './store/reducer';
     NotesRoutingModule,
     StoreModule.forFeature('notes', noteReducer),
     EffectsModule.forFeature([NoteEffects])
-  ]
+  ],
+  providers: [NotesService]
 })
 export class NotesModule {}

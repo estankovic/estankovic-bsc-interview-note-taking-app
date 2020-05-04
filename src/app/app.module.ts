@@ -11,11 +11,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { BACKEND_BASE_URL } from './notes/notes.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,9 +24,17 @@ import { environment } from '../environments/environment';
     FormsModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 250, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({
+      maxAge: 250,
+      logOnly: environment.production
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: BACKEND_BASE_URL,
+      useValue: environment.backendUrl
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
