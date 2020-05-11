@@ -10,6 +10,8 @@ import {
   loadNotes,
   loadNotesFail,
   loadNotesSuccess,
+  markNoteAsDone,
+  markNoteAsTodo,
   removeNote,
   removeNoteFail,
   removeNoteSuccess,
@@ -65,6 +67,20 @@ export class NoteEffects {
           catchError(err => of(removeNoteFail({ err })))
         )
       )
+    )
+  );
+
+  markNoteAsTodo = createEffect(() =>
+    this.actions.pipe(
+      ofType(markNoteAsTodo),
+      map(({ id }) => updateNote({ note: { id, done: false } }))
+    )
+  );
+
+  markNoteAsDone = createEffect(() =>
+    this.actions.pipe(
+      ofType(markNoteAsDone),
+      map(({ id }) => updateNote({ note: { id, done: true } }))
     )
   );
 

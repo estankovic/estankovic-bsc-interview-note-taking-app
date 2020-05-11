@@ -20,8 +20,8 @@ export class NotesService {
     return this.http.post<Note>(this.buildUrl(`/notes`), data);
   }
 
-  updateNote(id: number, data: Note): Observable<Note> {
-    return this.http.put<Note>(this.buildUrl(`/notes/${id}`), data);
+  updateNote(id: number, data: Partial<Note>): Observable<Note> {
+    return this.http.patch<Note>(this.buildUrl(`/notes/${id}`), data);
   }
 
   removeNote(id: number): Observable<Note> {

@@ -42,6 +42,7 @@ const reducer = createReducer(
     return {
       ...state,
       data: noteAdapter.upsertMany(notes, state.data),
+      list: notes.map(note => note.id),
       loading: false,
       loaded: true
     };

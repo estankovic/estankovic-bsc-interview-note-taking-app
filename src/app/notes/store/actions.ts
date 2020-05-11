@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { Note } from '../note.interface';
 
+export const markNoteAsDone = createAction('[Notes] Mark note as done', props<{ id: number }>());
+export const markNoteAsTodo = createAction('[Notes] Mark note as to do', props<{ id: number }>());
+
+
 export const loadNotes = createAction('[Notes] Load notes');
 export const loadNotesSuccess = createAction(
   '[Notes] Load notes Success',
@@ -26,7 +30,7 @@ export const createNoteFail = createAction(
 
 export const updateNote = createAction(
   '[Notes] Update note',
-  props<{ note: Note }>()
+  props<{ note: Partial<Note> }>()
 );
 export const updateNoteSuccess = createAction(
   '[Notes] Update note Success',
