@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="goToNotes()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="flex-spacer"></span>
+  <span>Note</span>
+  <span class="flex-spacer"></span>
+  <button mat-icon-button><mat-icon>edit</mat-icon></button>
+</mat-toolbar>
+<div class="content">
+  <mat-card class="note" *ngIf="note | async as note">
+    <mat-card-content>
+      <p>{{ note.title }}</p>
+    </mat-card-content>
+    <!--    <mat-form-field appearance="standard">-->
+    <!--      <mat-label>Textarea</mat-label>-->
+    <!--      <textarea matInput [value]="note.title"></textarea>-->
+    <!--    </mat-form-field>-->
+    <mat-card-actions>
+      <mat-checkbox
+        [checked]="note.done"
+        (change)="toggleDoneStatus($event, note)"
+        >Done?</mat-checkbox
+      >
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectRouteParam } from 'src/app/shared/store/router/selectors';
 import { NotesState } from './reducer';
 
 const featureSelector = createFeatureSelector<NotesState>('notes');
@@ -19,4 +20,11 @@ export const notesListView = createSelector(
   notesDataEntities,
   notesList,
   (data, list) => list.map(item => data[item])
+);
+
+export const currentNoteId = selectRouteParam('noteId');
+export const currentNote = createSelector(
+  currentNoteId,
+  notesDataEntities,
+  (id, entities) => entities[id]
 );

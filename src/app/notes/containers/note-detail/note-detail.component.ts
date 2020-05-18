@@ -3,25 +3,23 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Note } from '../../note.interface';
-import { loadNotes, markNoteAsDone, markNoteAsTodo, openNote } from '../../store/actions';
-import { notesListView } from '../../store/selectors';
+import { markNoteAsDone, markNoteAsTodo, openNotes } from '../../store/actions';
+import { currentNote } from '../../store/selectors';
 
 @Component({
-  selector: 'app-note-list',
-  templateUrl: './note-list.component.html',
-  styleUrls: ['./note-list.component.scss']
+  selector: 'app-note-detail',
+  templateUrl: './note-detail.component.html',
+  styleUrls: ['./note-detail.component.scss']
 })
-export class NoteListComponent implements OnInit {
-  notes$: Observable<Note[]> = this.store.pipe(select(notesListView));
+export class NoteDetailComponent implements OnInit {
+  note: Observable<Note> = this.store.pipe(select(currentNote));
 
   constructor(readonly store: Store<any>) {}
 
-  ngOnInit(): void {
-    this.store.dispatch(loadNotes());
-  }
+  ngOnInit(): void {}
 
-  openNote(note: Note) {
-    this.store.dispatch(openNote({id: note.id}));
+  goToNotes() {
+    this.store.dispatch(openNotes());
   }
 
   toggleDoneStatus(event: MatCheckboxChange, note: Note) {
@@ -31,4 +29,5 @@ export class NoteListComponent implements OnInit {
       this.store.dispatch(markNoteAsTodo({ id: note.id }));
     }
   }
+
 }

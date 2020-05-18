@@ -16,6 +16,10 @@ export class NotesService {
     return this.http.get<Note[]>(this.buildUrl(`/notes`));
   }
 
+  getNote(id: number): Observable<Note> {
+    return this.http.get<Note>(this.buildUrl(`/notes/${id}`));
+  }
+
   createNote(data: Note): Observable<Note> {
     return this.http.post<Note>(this.buildUrl(`/notes`), data);
   }

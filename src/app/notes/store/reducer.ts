@@ -1,10 +1,13 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 import { Note } from '../note.interface';
 import {
   createNote,
   createNoteFail,
   createNoteSuccess,
+  getNote,
+  getNoteFail,
+  getNoteSuccess,
   loadNotes,
   loadNotesFail,
   loadNotesSuccess,
@@ -48,6 +51,21 @@ const reducer = createReducer(
     };
   }),
   on(loadNotesFail, state => {
+    return { ...state, loading: false };
+  }),
+  // GET
+  on(getNote, state => {
+    return { ...state, loading: true, loaded: false };
+  }),
+  on(getNoteSuccess, (state, { note }) => {
+    return {
+      ...state,
+      data: noteAdapter.upsertOne(note, state.data),
+      loading: false,
+      loaded: true
+    };
+  }),
+  on(getNoteFail, state => {
     return { ...state, loading: false };
   }),
   // CREATE
@@ -100,7 +118,7 @@ const reducer = createReducer(
   }),
   on(removeNoteFail, state => {
     return { ...state, loading: false };
-  })
+  }),
 );
 
 export function noteReducer(state: NotesState, action: Action) {

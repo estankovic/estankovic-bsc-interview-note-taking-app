@@ -1,6 +1,4 @@
 :host {
-
-
   .content {
     display: flex;
     flex-direction: column;
@@ -8,13 +6,15 @@
     justify-content: center;
     width: 100%;
 
-    .note-list {
+    .note {
       width: 750px;
       flex: 1;
 
-      .note {
-        &.done {
-          text-decoration: line-through;
+      mat-form-field {
+        width: 100%;
+
+        textarea {
+          height: 250px;
         }
       }
     }

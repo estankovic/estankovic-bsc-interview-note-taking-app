@@ -1,9 +1,18 @@
-<mat-toolbar>My App</mat-toolbar>
+<mat-toolbar>My notes</mat-toolbar>
 <div class="content">
   <mat-nav-list class="note-list">
-    <mat-list-item *ngFor="let note of notes$ | async">
-      <p matLine >{{ note.title }}</p>
-      <mat-checkbox [checked]="note.done" (change)="toggleDoneStatus($event, note)"></mat-checkbox>
+    <mat-list-item
+      class="note"
+      [class.done]="note.done"
+      *ngFor="let note of notes$ | async"
+      (click)="openNote(note)"
+    >
+      <p matLine>{{ note.title }}</p>
+      <mat-checkbox
+        [checked]="note.done"
+        (change)="toggleDoneStatus($event, note)"
+        (click)="$event.stopPropagation()"
+      ></mat-checkbox>
     </mat-list-item>
   </mat-nav-list>
 </div>
