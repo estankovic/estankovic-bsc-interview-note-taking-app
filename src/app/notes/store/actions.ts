@@ -19,6 +19,16 @@ export const openNotes = createAction(
   '[Notes] Open notes',
 );
 
+export const editNote = createAction(
+  '[Notes] Edit note',
+  props<{ id: number }>()
+);
+
+export const editNoteSave = createAction(
+  '[Notes] Edit note Save',
+  props<{ note: Note }>()
+);
+
 export const loadNotes = createAction('[Notes] Load notes');
 export const loadNotesSuccess = createAction(
   '[Notes] Load notes Success',

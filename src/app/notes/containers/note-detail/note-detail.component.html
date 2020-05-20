@@ -1,17 +1,20 @@
-<mat-toolbar>
-  <button mat-icon-button (click)="goToNotes()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <span class="flex-spacer"></span>
-  <span>Note</span>
-  <span class="flex-spacer"></span>
-  <button mat-icon-button><mat-icon>edit</mat-icon></button>
-</mat-toolbar>
-<div class="content">
-  <app-note-card
-    class="note"
-    *ngIf="note | async as note"
-    [note]="note"
-    (noteChanges)="toggleDoneStatus($event, note)"
-  ></app-note-card>
-</div>
+<ng-container *ngIf="note | async as note">
+  <mat-toolbar>
+    <button mat-icon-button (click)="goToNotes()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="flex-spacer"></span>
+    <span>Note</span>
+    <span class="flex-spacer"></span>
+    <button mat-icon-button (click)="editNote(note)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="content">
+    <app-note-card
+      class="note"
+      [note]="note"
+      (noteChanges)="toggleDoneStatus($event, note)"
+    ></app-note-card>
+  </div>
+</ng-container>

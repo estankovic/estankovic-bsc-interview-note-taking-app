@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, delay, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, delay, map, switchMap, tap } from 'rxjs/operators';
 import { NotesService } from '../notes.service';
 import {
   createNote,
   createNoteFail,
   createNoteSuccess,
+  editNote,
+  editNoteSave,
   getNote,
   getNoteFail,
   getNoteSuccess,
@@ -129,6 +131,18 @@ export class NoteEffects {
     { dispatch: false }
   );
 
+  editNote = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(editNote),
+        delay(ANIMATION_DELAY),
+        tap(({ id }) => {
+          this.router.navigate(['notes', id, 'edit']);
+        })
+      ),
+    { dispatch: false }
+  );
+
   openNotes = createEffect(
     () =>
       this.actions.pipe(
@@ -139,6 +153,16 @@ export class NoteEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  editNoteSave = createEffect(() =>
+    this.actions.pipe(
+      ofType(editNoteSave),
+      delay(ANIMATION_DELAY),
+      concatMap(({ note }) => {
+        return [updateNote({ note }), openNote({ id: note.id })];
+      })
+    )
   );
 
   constructor(

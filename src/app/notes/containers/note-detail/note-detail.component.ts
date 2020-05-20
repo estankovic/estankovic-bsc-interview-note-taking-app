@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Note } from '../../note.interface';
-import { markNoteAsDone, markNoteAsTodo, openNotes } from '../../store/actions';
+import { editNote, markNoteAsDone, markNoteAsTodo, openNotes } from '../../store/actions';
 import { currentNote } from '../../store/selectors';
 
 @Component({
@@ -27,5 +27,9 @@ export class NoteDetailComponent implements OnInit {
     } else {
       this.store.dispatch(markNoteAsTodo({ id: note.id }));
     }
+  }
+
+  editNote(note: Note) {
+    this.store.dispatch(editNote({ id: note.id }));
   }
 }

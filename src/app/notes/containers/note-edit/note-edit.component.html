@@ -1,15 +1,20 @@
-<mat-toolbar>
-  <button mat-icon-button (click)="close()">
-    <mat-icon>close</mat-icon>
-  </button>
-  <span class="flex-spacer"></span>
-  <span>Note</span>
-  <span class="flex-spacer"></span>
-  <button mat-icon-button (click)="save()"><mat-icon>save</mat-icon></button>
-</mat-toolbar>
-<div class="content">
-  <app-note-card class="note" *ngIf="note | async as note" [note]="note" [editing]="true">
-
-
-  </app-note-card>
-</div>
+<ng-container *ngIf="note | async as note">
+  <mat-toolbar>
+    <button mat-icon-button (click)="close(note)">
+      <mat-icon>close</mat-icon>
+    </button>
+    <span class="flex-spacer"></span>
+    <span>Note</span>
+    <span class="flex-spacer"></span>
+    <button mat-icon-button (click)="save()"><mat-icon>save</mat-icon></button>
+  </mat-toolbar>
+  <div class="content">
+    <app-note-card
+      class="note"
+      [note]="note"
+      [editing]="true"
+      (noteChanges)="noteChange($event)"
+    >
+    </app-note-card>
+  </div>
+</ng-container>

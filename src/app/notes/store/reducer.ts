@@ -118,7 +118,7 @@ const reducer = createReducer(
   }),
   on(removeNoteFail, state => {
     return { ...state, loading: false };
-  }),
+  })
 );
 
 export function noteReducer(state: NotesState, action: Action) {

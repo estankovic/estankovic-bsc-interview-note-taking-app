@@ -15,11 +15,12 @@ export class NoteCardComponent implements OnInit, OnChanges {
 
   @Input() note: Note;
 
-  @Output() noteChanges = new EventEmitter<{ title: string; done: boolean }>();
+  @Output() noteChanges = new EventEmitter<Note>();
 
   private readonly destroyed$ = new Subject();
 
   form = new FormGroup({
+    id: new FormControl(),
     title: new FormControl(),
     done: new FormControl()
   });
@@ -36,6 +37,7 @@ export class NoteCardComponent implements OnInit, OnChanges {
     if (this.note) {
       this.form.setValue(
         {
+          id: this.note.id,
           title: this.note.title,
           done: this.note.done
         },
