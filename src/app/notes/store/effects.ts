@@ -18,6 +18,7 @@ import {
   loadNotesSuccess,
   markNoteAsDone,
   markNoteAsTodo,
+  openCreateNote,
   openNote,
   openNotes,
   removeNote,
@@ -60,9 +61,7 @@ export class NoteEffects {
     () =>
       this.actions.pipe(
         ofType(getNoteFail),
-        tap(({ err }) => {
-          this.router.navigate(['notes']);
-        })
+        tap(({ err }) => this.router.navigate(['notes']))
       ),
     { dispatch: false }
   );
@@ -77,6 +76,15 @@ export class NoteEffects {
         )
       )
     )
+  );
+
+  createNoteSuccess = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(createNote),
+        tap(() => this.router.navigate(['notes']))
+      ),
+    { dispatch: false }
   );
 
   updateNote = createEffect(() =>
@@ -94,12 +102,19 @@ export class NoteEffects {
   removeNote = createEffect(() =>
     this.actions.pipe(
       ofType(removeNote),
-      switchMap(({ note }) =>
-        this.service.removeNote(note.id).pipe(
+      switchMap(({ id }) =>
+        this.service.removeNote(id).pipe(
           map(response => removeNoteSuccess({ note: response })),
           catchError(err => of(removeNoteFail({ err })))
         )
       )
+    )
+  );
+
+  removeNoteSuccess = createEffect(() =>
+    this.actions.pipe(
+      ofType(removeNoteSuccess),
+      map(() => openNotes())
     )
   );
 
@@ -119,14 +134,22 @@ export class NoteEffects {
     )
   );
 
+  openCreateNote = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(openCreateNote),
+        delay(ANIMATION_DELAY),
+        tap(() => this.router.navigate(['notes', 'create']))
+      ),
+    { dispatch: false }
+  );
+
   openNote = createEffect(
     () =>
       this.actions.pipe(
         ofType(openNote),
         delay(ANIMATION_DELAY),
-        tap(({ id }) => {
-          this.router.navigate(['notes', id]);
-        })
+        tap(({ id }) => this.router.navigate(['notes', id]))
       ),
     { dispatch: false }
   );
@@ -136,9 +159,7 @@ export class NoteEffects {
       this.actions.pipe(
         ofType(editNote),
         delay(ANIMATION_DELAY),
-        tap(({ id }) => {
-          this.router.navigate(['notes', id, 'edit']);
-        })
+        tap(({ id }) => this.router.navigate(['notes', id, 'edit']))
       ),
     { dispatch: false }
   );
@@ -148,9 +169,7 @@ export class NoteEffects {
       this.actions.pipe(
         ofType(openNotes),
         delay(ANIMATION_DELAY),
-        tap(_ => {
-          this.router.navigate(['notes']);
-        })
+        tap(_ => this.router.navigate(['notes']))
       ),
     { dispatch: false }
   );
@@ -159,9 +178,7 @@ export class NoteEffects {
     this.actions.pipe(
       ofType(editNoteSave),
       delay(ANIMATION_DELAY),
-      concatMap(({ note }) => {
-        return [updateNote({ note }), openNote({ id: note.id })];
-      })
+      concatMap(({ note }) => [updateNote({ note }), openNote({ id: note.id })])
     )
   );
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ConfirmComponent } from '../../dialogs/confirm/confirm.component';
 import { Note } from '../../note.interface';
-import { editNote, markNoteAsDone, markNoteAsTodo, openNotes } from '../../store/actions';
+import { editNote, markNoteAsDone, markNoteAsTodo, openNotes, removeNote } from '../../store/actions';
 import { currentNote } from '../../store/selectors';
 
 @Component({
@@ -13,7 +15,7 @@ import { currentNote } from '../../store/selectors';
 export class NoteDetailComponent implements OnInit {
   note: Observable<Note> = this.store.pipe(select(currentNote));
 
-  constructor(readonly store: Store<any>) {}
+  constructor(readonly store: Store<any>, readonly dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -31,5 +33,15 @@ export class NoteDetailComponent implements OnInit {
 
   editNote(note: Note) {
     this.store.dispatch(editNote({ id: note.id }));
+  }
+
+  deleteNote(note: Note) {
+    const ref = this.dialog.open(ConfirmComponent);
+
+    ref
+      .afterClosed()
+      .subscribe(decision =>
+        decision ? this.store.dispatch(removeNote({ id: note.id })) : null
+      );
   }
 }

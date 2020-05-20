@@ -76,6 +76,7 @@ const reducer = createReducer(
     return {
       ...state,
       data: noteAdapter.addOne(note, state.data),
+      list: [...state.list, note.id],
       loading: false,
       loaded: true
     };
@@ -109,9 +110,12 @@ const reducer = createReducer(
     return { ...state, loading: true };
   }),
   on(removeNoteSuccess, (state, { note }) => {
+    const nextList = [...state.list];
+    nextList.splice(nextList.indexOf(note.id));
     return {
       ...state,
       data: noteAdapter.removeOne(note.id, state.data),
+      list: nextList,
       loading: false,
       loaded: true
     };

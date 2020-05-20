@@ -10,6 +10,10 @@ export const markNoteAsTodo = createAction(
   props<{ id: number }>()
 );
 
+export const openCreateNote = createAction(
+  '[Notes] Open Create note'
+);
+
 export const openNote = createAction(
   '[Notes] Open note',
   props<{ id: number }>()
@@ -80,7 +84,7 @@ export const updateNoteFail = createAction(
 
 export const removeNote = createAction(
   '[Notes] Remove note',
-  props<{ note: Note }>()
+  props<{ id: number }>()
 );
 export const removeNoteSuccess = createAction(
   '[Notes] Remove note Success',

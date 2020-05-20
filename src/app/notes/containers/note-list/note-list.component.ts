@@ -3,7 +3,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Note } from '../../note.interface';
-import { loadNotes, markNoteAsDone, markNoteAsTodo, openNote } from '../../store/actions';
+import { loadNotes, markNoteAsDone, markNoteAsTodo, openCreateNote, openNote } from '../../store/actions';
 import { notesListView } from '../../store/selectors';
 
 @Component({
@@ -20,8 +20,12 @@ export class NoteListComponent implements OnInit {
     this.store.dispatch(loadNotes());
   }
 
+  createNote() {
+    this.store.dispatch(openCreateNote());
+  }
+
   openNote(note: Note) {
-    this.store.dispatch(openNote({id: note.id}));
+    this.store.dispatch(openNote({ id: note.id }));
   }
 
   toggleDoneStatus(event: MatCheckboxChange, note: Note) {
