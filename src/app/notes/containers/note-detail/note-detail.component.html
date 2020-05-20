@@ -8,20 +8,10 @@
   <button mat-icon-button><mat-icon>edit</mat-icon></button>
 </mat-toolbar>
 <div class="content">
-  <mat-card class="note" *ngIf="note | async as note">
-    <mat-card-content>
-      <p>{{ note.title }}</p>
-    </mat-card-content>
-    <!--    <mat-form-field appearance="standard">-->
-    <!--      <mat-label>Textarea</mat-label>-->
-    <!--      <textarea matInput [value]="note.title"></textarea>-->
-    <!--    </mat-form-field>-->
-    <mat-card-actions>
-      <mat-checkbox
-        [checked]="note.done"
-        (change)="toggleDoneStatus($event, note)"
-        >Done?</mat-checkbox
-      >
-    </mat-card-actions>
-  </mat-card>
+  <app-note-card
+    class="note"
+    *ngIf="note | async as note"
+    [note]="note"
+    (noteChanges)="toggleDoneStatus($event, note)"
+  ></app-note-card>
 </div>

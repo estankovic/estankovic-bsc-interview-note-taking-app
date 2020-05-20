@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Note } from '../../note.interface';
@@ -22,12 +21,11 @@ export class NoteDetailComponent implements OnInit {
     this.store.dispatch(openNotes());
   }
 
-  toggleDoneStatus(event: MatCheckboxChange, note: Note) {
-    if (event.checked) {
+  toggleDoneStatus(event: { title: string; done: boolean }, note: Note) {
+    if (event.done) {
       this.store.dispatch(markNoteAsDone({ id: note.id }));
     } else {
       this.store.dispatch(markNoteAsTodo({ id: note.id }));
     }
   }
-
 }

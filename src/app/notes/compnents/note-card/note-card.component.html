@@ -1,0 +1,21 @@
+<mat-card class="note" *ngIf="note" [formGroup]="form">
+  <mat-card-content *ngIf="editing; else body">
+      <mat-form-field appearance="standard">
+        <mat-label>Title</mat-label>
+        <textarea matInput formControlName="title"></textarea>
+      </mat-form-field>
+  </mat-card-content>
+
+  <ng-template #body>
+    <mat-card-content>
+      <p>{{ note.title }}</p>
+    </mat-card-content>
+  </ng-template>
+
+  <mat-card-actions>
+    <mat-checkbox
+      formControlName="done"
+    >Done?</mat-checkbox
+    >
+  </mat-card-actions>
+</mat-card>
