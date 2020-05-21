@@ -67,7 +67,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bsc-interview-note-taking-app:build"
+            "browserTarget": "bsc-interview-note-taking-app:build",
+            "port": 9000
           },
           "configurations": {
             "production": {
