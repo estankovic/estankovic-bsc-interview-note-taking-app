@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LanguageService {
   static DEFAULT_LANGUAGE = 'en';
+  static LANGUAGE_STORE_KEY = 'application.language';
 
   constructor(private readonly translationService: TranslateService) {}
 
@@ -21,7 +20,7 @@ export class LanguageService {
    */
   setLanguage(language: string) {
     this.translationService.use(language);
-    localStorage.setItem('application.language', language);
+    localStorage.setItem(LanguageService.LANGUAGE_STORE_KEY, language);
   }
 
   /**
@@ -29,7 +28,7 @@ export class LanguageService {
    */
   getLanguage() {
     return (
-      localStorage.getItem('application.language') ||
+      localStorage.getItem(LanguageService.LANGUAGE_STORE_KEY) ||
       LanguageService.DEFAULT_LANGUAGE
     );
   }
