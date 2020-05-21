@@ -13,6 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 import { NoteCardComponent } from './compnents/note-card/note-card.component';
 import { NoteCreateComponent } from './containers/note-create/note-create.component';
 import { NoteDetailComponent } from './containers/note-detail/note-detail.component';
@@ -27,10 +29,18 @@ import { NoteEffects } from './store/effects';
 import { noteReducer } from './store/reducer';
 
 @NgModule({
-  declarations: [NoteListComponent, NoteDetailComponent, NoteEditComponent, NoteCardComponent, NoteCreateComponent, ConfirmComponent],
+  declarations: [
+    NoteListComponent,
+    NoteDetailComponent,
+    NoteEditComponent,
+    NoteCardComponent,
+    NoteCreateComponent,
+    ConfirmComponent
+  ],
   imports: [
     CommonModule,
     NotesRoutingModule,
+    SharedModule,
     StoreModule.forFeature('notes', noteReducer),
     EffectsModule.forFeature([NoteEffects]),
     MatToolbarModule,
@@ -43,7 +53,8 @@ import { noteReducer } from './store/reducer';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule,
   ],
   providers: [NotesService, ResolveNoteGuard]
 })

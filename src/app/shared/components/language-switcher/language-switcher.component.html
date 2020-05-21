@@ -1,0 +1,7 @@
+<mat-form-field [formGroup]="form">
+  <mat-select formControlName="language">
+    <mat-option *ngFor="let lang of ['en', 'sk']" [value]="lang">
+      {{ lang }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

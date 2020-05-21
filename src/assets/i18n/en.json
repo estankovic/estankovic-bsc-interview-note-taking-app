@@ -1,0 +1,17 @@
+{
+  "NOTES": {
+    "MY_NOTES": "My Notes",
+    "CREATE": "Create",
+    "NOTE": "Note",
+    "TITLE": "Title",
+    "REMOVE_DIALOG": {
+      "TITLE": "Remove note?",
+      "MESSAGE": "Are you sure you want to delete this note?"
+    },
+    "DONE?": "Done?"
+  },
+  "GENERAL": {
+    "YES": "Yes",
+    "NO": "No"
+  }
+}

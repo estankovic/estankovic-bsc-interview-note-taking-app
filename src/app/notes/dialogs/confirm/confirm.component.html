@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Remove note?</h2>
+<h2 mat-dialog-title>{{ "NOTE.REMOVE_DIALOG.TITLE" | translate }}</h2>
 <mat-dialog-content>
-  <p>Are you sure you want to delete this note?</p>
+  <p>{{ "NOTE.REMOVE_DIALOG.MESSAGE" | translate }}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="no()" autofocus>No</button>
-  <button mat-raised-button (click)="yes()" color="warn">Yes</button>
+  <button mat-button (click)="no()" autofocus>{{ "GENERAL.NO" | translate }}</button>
+  <button mat-raised-button (click)="yes()" color="warn">{{ "GENERAL.YES" | translate }}</button>
 </mat-dialog-actions>

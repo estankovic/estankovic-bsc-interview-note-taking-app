@@ -1,9 +1,9 @@
 <mat-card class="note" *ngIf="note" [formGroup]="form">
   <mat-card-content *ngIf="editing; else body">
-      <mat-form-field appearance="standard">
-        <mat-label>Title</mat-label>
-        <textarea matInput formControlName="title"></textarea>
-      </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "NOTES.TITLE" | translate }}</mat-label>
+      <textarea matInput formControlName="title"></textarea>
+    </mat-form-field>
   </mat-card-content>
 
   <ng-template #body>
@@ -13,9 +13,8 @@
   </ng-template>
 
   <mat-card-actions>
-    <mat-checkbox
-      formControlName="done"
-    >Done?</mat-checkbox
-    >
+    <mat-checkbox formControlName="done">{{
+      "NOTES.DONE?" | translate
+    }}</mat-checkbox>
   </mat-card-actions>
 </mat-card>

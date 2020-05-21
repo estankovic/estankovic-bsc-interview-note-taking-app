@@ -1,0 +1,17 @@
+{
+  "NOTES": {
+    "MY_NOTES": "Moje ponznámky",
+    "CREATE": "Vytvoriť",
+    "NOTE": "Poznámka",
+    "TITLE": "Popisok",
+    "REMOVE_DIALOG": {
+      "TITLE": "Odstrániť poznámku?",
+      "MESSAGE": "Ste si naozaj istý, že chcete odstrániť túto poznámku?"
+    },
+    "DONE?": "Hotovo?"
+  },
+  "GENERAL": {
+    "YES": "Áno",
+    "NO": "Nie"
+  }
+}
