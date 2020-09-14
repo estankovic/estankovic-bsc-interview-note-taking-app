@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { Note } from '../../note.interface';
   styleUrls: ['./note-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NoteCardComponent implements OnInit, OnChanges {
+export class NoteCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() editing = false;
 
   @Input() note: Note;
@@ -44,5 +44,10 @@ export class NoteCardComponent implements OnInit, OnChanges {
         { emitEvent: false }
       );
     }
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }
